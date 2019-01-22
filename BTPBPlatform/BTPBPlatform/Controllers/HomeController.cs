@@ -22,6 +22,13 @@ namespace BTPBPlatform.Controllers
             return View();
         }
 
+        public IActionResult Platform()
+        {
+            ViewData["Message"] = "BTPBuddy Platform";
+
+            return View();
+        }
+
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
