@@ -12,6 +12,11 @@ body {
     padding-right: 15px;
 }
 
+/* For IE 6 */
+.container {
+    height: 100%;
+}
+
 .navbar {
     background-color: crimson;
     font-size: 15px; 
@@ -19,6 +24,10 @@ body {
 
 .nav, .navbar-header {
     padding: 10px 0;
+}
+
+.navbar-nav > li > a:hover {
+    font-size: 17px;
 }
 
 .contact_mail {
