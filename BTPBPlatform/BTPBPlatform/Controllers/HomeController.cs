@@ -31,7 +31,7 @@ namespace BTPBPlatform.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Obtenir plus d'informations";
 
             return View();
         }

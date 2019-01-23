@@ -2,21 +2,54 @@
     ViewData["Title"] = "Contact";
 }
 <h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<address>
-    BTPBuddy Corporation<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <div class="contact_mail">
-        <strong>Tech Support:</strong> <a href="mailto:doneill612@gmail.com">doneill612@gmail.com</a> & 
-        <a href="mailto:ertan.ozaydin@gmail.com">ertan.ozaydin@gmail.com</a>
-    </div>
-    <div class="contact_mail">    
-        <strong>Marketing:</strong> <a href="mailto:btpbuddy@gmail.com">btpbuddy@gmail.com</a>
-    </div>
-</address>
+<form class="form-horizontal">
+    <fieldset>
+        <legend>@ViewData["Message"]</legend>
+        <div class="form-group">
+            <label for="lastname" class="col-lg-2 control-label">Nom</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="lastname" placeholder="Nom">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="firstname" class="col-lg-2 control-label">Prenom</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="firstname" placeholder="Prenom">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="businessname" class="col-lg-2 control-label">Entreprise</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="businessname" placeholder="Nom de votre entreprise">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="phonenumber" class="col-lg-2 control-label">Téléphone</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="phonenumber" placeholder="Téléphone">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-lg-2 control-label">Email</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="email" placeholder="Adresse email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inquiry" class="col-lg-2 control-label">Infos.</label>
+            <div class="col-lg-10">
+                <textarea class="form-control" rows="3" id="inquiry"></textarea>
+                <span class="help-block">
+                    Veuillez inclure des informations supplémentaires sur votre demande.
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
