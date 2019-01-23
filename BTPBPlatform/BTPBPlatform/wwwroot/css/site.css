@@ -12,6 +12,19 @@ body {
     padding-right: 15px;
 }
 
+.navbar {
+    background-color: crimson;
+    font-size: 15px; 
+}
+
+.nav, .navbar-header {
+    padding: 10px 0;
+}
+
+.contact_mail {
+    padding: 20px 0;
+}
+
 .userbio {
     padding: 20px;
 }
