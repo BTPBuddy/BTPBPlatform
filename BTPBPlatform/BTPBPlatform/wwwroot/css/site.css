@@ -17,6 +17,9 @@ body {
     height: 100%;
 }
 
+.home_header {
+    margin: 50px;
+}
 
 .navbar {
     font-size: 15px;
@@ -38,6 +41,11 @@ body {
     padding: 20px;
 }
 
+.jumbotron {
+    text-align: center;
+}
+
+/* 
 #jumbologo {
 
     padding-left:100px;
@@ -46,10 +54,11 @@ body {
 #jumbointro {
     padding-left:35px;
     text-align:center
-}
+} */
 
 #jumbobuttongroup {
-    text-align:center
+    text-align:center;
+    padding: 20px;
 }
 
 /* Carousel */
