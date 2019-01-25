@@ -36,6 +36,13 @@ namespace BTPBPlatform.Controllers
             return View();
         }
 
+        public IActionResult Login()
+        {
+            ViewData["Message"] = "Enter your username, client ID, and password";
+
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
