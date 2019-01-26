@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+@using Microsoft.AspNetCore.Http
 <html>
 <head>
     <meta charset="utf-8" />
@@ -38,7 +39,17 @@
                     <li><a href="https://btpbuddy.github.io" target="_blank">Blog</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Login">Se connecter</a></li>
+                    @{
+                        if (!SessionUtils.SessionAuthenticated(Context.Session))
+                        {
+                            <li><a asp-area="" asp-controller="Home" asp-action="Login">Se connecter</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-area="" asp-controller="Home" asp-action="Index">@SessionUtils.GetSessionUserTitle(Context.Session)</a></li>
+                        }
+                    }
+
                 </ul>
             </div>
         </div>

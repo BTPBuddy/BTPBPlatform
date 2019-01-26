@@ -38,7 +38,7 @@ namespace BTPBPlatform.Controllers
 
         public IActionResult Login()
         {
-            ViewData["Message"] = "Enter your username, client ID, and password";
+            ViewData["Message"] = "Entrez vos identifiants";
 
             return View();
         }

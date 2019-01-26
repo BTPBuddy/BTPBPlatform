@@ -6,6 +6,9 @@ using BTPBCommon.Clients;
 using BTPBCommon.Exceptions;
 using BTPBPlatform.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Session;
+using Newtonsoft.Json;
 
 namespace BTPBPlatform.Controllers
 {
@@ -29,26 +32,25 @@ namespace BTPBPlatform.Controllers
                 if (ModelState.IsValid)
                 {
                     User user = new User(cUser.Username);
-                    string salted = cUser.Password + user.Salt;
-                    string hashed = Authentication.Sha2_256(salted);
-                    if (user.Password.Equals(hashed))
+                    if (cUser.Authenticate(user))
                     {
-                        return Json(user);
+                        HttpContext.Session.SetString("user", JsonConvert.SerializeObject(cUser));
+                        return RedirectToAction("Index", "Home");
                     }
                     else
                     {
-                        throw new BTPBInvalidLoginException();
+                        throw new BTPBInvalidPasswordException();
                     }
                 }
                 else
                 {
-                    throw new BTPBInvalidLoginException();
+                    throw new DBReadException();
                 }
                 
             }
-            catch (BTPBException ex)
+            catch (BTPBException)
             {
-                return Json(ex);
+                return View();
             }
         }
 
