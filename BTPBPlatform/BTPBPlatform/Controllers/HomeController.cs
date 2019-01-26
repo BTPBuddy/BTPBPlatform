@@ -36,9 +36,17 @@ namespace BTPBPlatform.Controllers
             return View();
         }
 
-        public IActionResult Login()
+        public IActionResult Login(bool? fail, string message)
         {
-            ViewData["Message"] = "Entrez vos identifiants";
+            if (fail != null)
+            {
+                ViewData["Message"] = message;
+            }
+            else
+            {
+                ViewData["Message"] = "Entrez vos identifiants";
+            }
+            
 
             return View();
         }

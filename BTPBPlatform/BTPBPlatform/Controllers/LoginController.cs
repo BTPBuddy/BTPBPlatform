@@ -19,6 +19,12 @@ namespace BTPBPlatform.Controllers
             return View();
         }
 
+        public IActionResult Logout()
+        {
+            SessionUtils.UnauthenticateSession(HttpContext.Session);
+            return RedirectToAction("Login", "Home", new { fail = false, message = "Vous vous êtes déconnecté" });
+        }
+
         public IActionResult Login()
         {
             return View();
@@ -48,9 +54,20 @@ namespace BTPBPlatform.Controllers
                 }
                 
             }
+            catch (BTPBInvalidPasswordException)
+            {
+                return RedirectToAction("Login", "Home", new { fail = true,
+                    message = "Mot de passe incorrect" });
+            }
+            catch (BTPBInvalidUsernameException)
+            {
+                return RedirectToAction("Login", "Home", new { fail = true,
+                    message = "Votre nom d'utilisateur ne correspond pas à votre ID client" });
+            }
             catch (BTPBException)
             {
-                return View();
+                return RedirectToAction("Login", "Home", new { fail = true,
+                    message = "Vos identifants sont incorrectes" });
             }
         }
 

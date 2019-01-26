@@ -21,18 +21,6 @@ body {
     margin: 50px;
 }
 
-.navbar {
-    font-size: 15px;
-}
-
-.nav, .navbar-header {
-    padding: 10px 0;
-}
-
-.navbar-nav > li > a:hover {
-    font-size: 17px;
-}
-
 .contact_mail {
     padding: 20px 0;
 }
@@ -45,21 +33,35 @@ body {
     text-align: center;
 }
 
-/* 
-#jumbologo {
-
-    padding-left:100px;
+.navbar {
+    font-size: 15px;
 }
 
-#jumbointro {
-    padding-left:35px;
-    text-align:center
-} */
+.btn-group {
+    padding:6px;
+}
+
+.navbar-nav > li > a:hover {
+    font-size: 17px;
+}
+
+
+#jumbologo {
+    height:425px;
+    width:425px;
+}
 
 #jumbobuttongroup {
     text-align:center;
     padding: 20px;
 }
+    
+#jumbointro {
+    font-size: 20px;
+    text-align:center;
+} 
+
+
 
 /* Carousel */
 .carousel-caption p {
@@ -70,6 +72,10 @@ body {
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
+}
+
+#landing {
+    text-align:center;
 }
 
 /* QR code generator */

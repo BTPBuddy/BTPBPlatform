@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BTPBuddy</title>
-
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-superhero.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-darkly3.css" />
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/css/footer.css" />
     </environment>
     <environment exclude="Development">
+
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
@@ -19,6 +19,9 @@
     </environment>
 </head>
 <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -46,10 +49,20 @@
                         }
                         else
                         {
-                            <li><a asp-area="" asp-controller="Home" asp-action="Index">@SessionUtils.GetSessionUserTitle(Context.Session)</a></li>
+                            <li>
+                                <div class="btn-group">
+                                    <a href="#" class="btn btn-primary">@SessionUtils.GetSessionUserTitle(Context.Session)</a>
+                                    <a href="#" type="button" class="btn btn-primary dropdown-toggle" 
+                                       data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Mon espace</a></li>
+                                        <li class="divider"></li>
+                                        <li><a asp-area="" asp-controller="Login" asp-action="Logout">Se deconnecter</a></li>
+                                    </ul>
+                                </div>
+                            </li>
                         }
                     }
-
                 </ul>
             </div>
         </div>
