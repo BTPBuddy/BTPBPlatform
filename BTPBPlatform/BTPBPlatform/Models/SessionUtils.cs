@@ -24,6 +24,19 @@ namespace BTPBPlatform.Models
         }
 
         /// <summary>
+        /// If there is no user currently authenticated, add the User to the Session.
+        /// </summary>
+        /// <param name="session">The browser session</param>
+        /// <param name="user">The authenticated user</param>
+        public static void AuthenticateSession(ISession session, ClientUser user)
+        {
+            if (!SessionAuthenticated(session))
+            {
+                session.SetString("user", JsonConvert.SerializeObject(user));
+            }
+        }
+
+        /// <summary>
         /// If there is currently a user authenticated, removes the User from the Session.
         /// </summary>
         /// <param name="session">The browser session</param>

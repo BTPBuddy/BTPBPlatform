@@ -38,9 +38,9 @@ namespace BTPBPlatform.Controllers
                 if (ModelState.IsValid)
                 {
                     User user = new User(cUser.Username);
-                    if (cUser.Authenticate(user))
+                    if (cUser.CompareCredentials(user))
                     {
-                        HttpContext.Session.SetString("user", JsonConvert.SerializeObject(cUser));
+                        SessionUtils.AuthenticateSession(HttpContext.Session, cUser);
                         return RedirectToAction("Index", "Home");
                     }
                     else

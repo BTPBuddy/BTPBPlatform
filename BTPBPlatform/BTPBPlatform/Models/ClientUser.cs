@@ -45,7 +45,7 @@ namespace BTPBPlatform.Models
         /// </summary>
         /// <param name="user">The <see cref="BTPBCommon.Clients.User"/> object retrived from the databse.</param>
         /// <returns>True if the credentials provided during sign-in match the credentials stored in the DB, false otherwise</returns>
-        public bool Authenticate(User user)
+        public bool CompareCredentials(User user)
         {
             if (this.ClientId != user.ClientId)
             {
