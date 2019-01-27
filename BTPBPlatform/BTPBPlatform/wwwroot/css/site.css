@@ -5,6 +5,12 @@ body {
     padding-bottom: 20px;
 }
 
+.footer {
+    bottom: 100px;
+    border-top: 1px solid lightblue;
+    padding: 10px 0;
+}
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
