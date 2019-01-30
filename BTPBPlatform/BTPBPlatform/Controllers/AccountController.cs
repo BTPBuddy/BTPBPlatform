@@ -10,7 +10,8 @@ namespace BTPBPlatform.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            ViewData["Message"] = "Votre compte";
+            return View("Account");
         }
     }
 }

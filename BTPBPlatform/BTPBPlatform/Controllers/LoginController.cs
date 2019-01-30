@@ -54,17 +54,17 @@ namespace BTPBPlatform.Controllers
                 }
                 
             }
-            catch (BTPBInvalidPasswordException)
+            catch (BTPBInvalidPasswordException ex)
             {
                 return RedirectToAction("Login", "Home", new { fail = true,
                     message = "Mot de passe incorrect" });
             }
-            catch (BTPBInvalidUsernameException)
+            catch (BTPBInvalidUsernameException ex)
             {
                 return RedirectToAction("Login", "Home", new { fail = true,
                     message = "Votre nom d'utilisateur ne correspond pas à votre ID client" });
             }
-            catch (BTPBException)
+            catch (BTPBException ex)
             {
                 return RedirectToAction("Login", "Home", new { fail = true,
                     message = "Vos identifants sont incorrectes" });
