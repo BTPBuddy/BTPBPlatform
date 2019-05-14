@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "Votre nouveau projet";
+}
+<h2>@ViewData["Title"]</h2>
+<form class="form-horizontal">
+    <fieldset>
+        <legend>@ViewData["Message"]</legend>
+        <div class="form-group">
+            <label for="project_name" class="col-lg-2 control-label">Nom du projet</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="project_name" placeholder="Nom du projet">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description" class="col-lg-2 control-label">Description</label>
+            <div class="col-lg-10">
+                <textarea class="form-control" rows="3" id="description"></textarea>
+                <span class="help-block">
+                    Donner un description de votre noveau projet.
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="submit" class="btn btn-primary">Créer</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+

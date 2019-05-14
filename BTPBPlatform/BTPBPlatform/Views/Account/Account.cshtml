@@ -1,27 +1,20 @@
 ﻿@using BTPBCommon.Clients;
+@using System.Globalization;
 @{
 
     ViewData["Title"] = "Account";
-    ClientUser user = SessionUtils.FromJson(Context.Session);
 }
 <h2>@ViewData["Message"]</h2>
-<h3>Vous êtes : @user.UserType</h3>
 <div class="row">
     <div class="col-sm-3">
-        <h4>Projets</h4>
         <ul class="list-group">
-            @{
-                if (user.UserType.Equals("ADMIN"))
-                {
-                    <li class="list-group-item">
-                        <span class="badge">0</span>
-                        Users
-                    </li>
-                }
-            }
             <li class="list-group-item">
-                <span class="badge">0</span>
-                Projects
+                <span class="badge">@ViewData["nUsers"]</span>
+                Collaborateurs
+            </li>
+            <li class="list-group-item">
+                <span class="badge">@ViewData["nProjects"]</span>
+                <a asp-area="" asp-controller="Projects" asp-action="Index">Projets</a>
             </li>
         </ul>
     </div>
