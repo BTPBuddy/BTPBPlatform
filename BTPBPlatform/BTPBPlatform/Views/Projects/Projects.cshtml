@@ -1,13 +1,14 @@
 ﻿@using BTPBCommon.Clients;
+@using BTPBCommon.Projects;
 @using System.Globalization;
 @{
     ViewData["Title"] = "Vos Projets";
 }
 <h1>@ViewData["Title"]</h1>
 <h2>@ViewData["Message"]</h2>
-<button type="submit" class="btn btn-primary">Créer un projet</button>
+<input type="button" value="Créer un projet" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("Create", "Projects") + "'");" />
 <div id="projects_table">
-    <table class="table table-hover">1
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">Projet</th>
@@ -17,9 +18,16 @@
             </tr>
         </thead>
         <tbody>
-            @{
-                // Loop through projects, displaying metadata in the HTML table
-            }
+        @foreach (Project p in ViewData["Projects"] as List<Project>)
+        {
+            <tr class="table-active">
+                <td>@p.Title</td>
+                <td>@p.Description</td>
+                <td>@p.Created</td>
+                <td>@p.Documents.Capacity</td>
+            </tr>
+        }
+            
         </tbody>
     </table>
 </div>

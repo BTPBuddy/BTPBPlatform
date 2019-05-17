@@ -61,6 +61,18 @@ namespace BTPBPlatform.Models
         }
 
         /// <summary>
+        /// REturns the client ID associated with the currently connected user.
+        /// </summary>
+        /// <param name="session">The browser session.</param>
+        /// <returns>The client ID of the currently connected user.</returns>
+        public static int GetSessionClientId(ISession session)
+        {
+            string json = session.GetString("user");
+            ClientUser user = JsonConvert.DeserializeObject<ClientUser>(json);
+            return user.ClientId;
+        }
+
+        /// <summary>
         /// Returns the currently connected user's Model representation.
         /// </summary>
         /// <param name="session">The browser session.</param>
