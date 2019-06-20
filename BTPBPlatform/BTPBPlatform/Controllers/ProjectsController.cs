@@ -61,7 +61,7 @@ namespace BTPBPlatform.Controllers
             string docs = "document";
             string association = "associé";
 
-            if (nDocuments > 1)
+            if (nDocuments != 1)
             {
                 docs += "s";
                 association += "s";

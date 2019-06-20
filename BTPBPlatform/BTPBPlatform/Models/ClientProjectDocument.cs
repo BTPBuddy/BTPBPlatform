@@ -67,7 +67,7 @@ namespace BTPBPlatform.Models
             }
         }
 
-        private async void ReadFileContents()
+        private async Task ReadFileContents()
         {
             using (FileStream fs = new FileStream(Path.GetTempFileName(), FileMode.Create))
             {
@@ -85,13 +85,13 @@ namespace BTPBPlatform.Models
             Title = File.FileName;
 
             PopulateTags();
-            ReadFileContents();
+            await ReadFileContents();
 
-            ProjectDocumentContent content = new ProjectDocumentContent(Title, FileContents, ContentTypeId);
-            content.Save();
-
-            ProjectDocument document = new ProjectDocument(content.Id, ProjectId, Title, TypeKey, Description, Tags);
+            ProjectDocument document = new ProjectDocument(ProjectId, Title, TypeKey, Description, Tags);
             document.Save();
+
+            ProjectDocumentContent content = new ProjectDocumentContent(document.Id, Title, FileContents, ContentTypeId);
+            content.Save();
         }
     }
 }
