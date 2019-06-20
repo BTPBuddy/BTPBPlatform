@@ -1,6 +1,4 @@
-﻿@using BTPBCommon.Clients;
-@using BTPBCommon.Projects;
-@using System.Globalization;
+﻿@using BTPBCommon.Projects;
 @{
     ViewData["Title"] = "Vos Projets";
 }
@@ -21,7 +19,7 @@
         @foreach (Project p in ViewData["Projects"] as List<Project>)
         {
             <tr class="table-active">
-                <td>@p.Title</td>
+                <td>@Html.ActionLink(@p.Title, "Project", "Projects", new { projectId = p.Id })</td>
                 <td>@p.Description</td>
                 <td>@p.Created</td>
                 <td>@p.Documents.Capacity</td>

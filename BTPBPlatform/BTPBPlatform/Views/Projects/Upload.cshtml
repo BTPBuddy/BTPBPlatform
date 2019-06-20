@@ -1,0 +1,60 @@
+﻿@using BTPBCommon;
+@using BTPBCommon.Codes;
+
+@model ClientProjectDocument
+<h2>@ViewData["Title"]</h2>
+<form asp-action="UploadDocument" asp-controller="Projects"
+      enctype="multipart/form-data" class="form-horizontal" method="post">
+    <fieldset>
+        <legend>@ViewData["Message"]</legend>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.Description, "Description",
+            new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.EditorFor(model => model.Description,
+                    new { htmlAttributes = new { @class = "form-control",
+                    required = "required", placeholder = "Description", type = "text",
+                    oninvalid = "setCustomValidity('Ce champ est obligatoire')",
+                    oninput = "setCustomValidity('')" } })
+            </div>
+        </div>
+        <div class="form-group required">
+            @Html.LabelFor(model => model.TagsString, "Tags",
+            new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.EditorFor(model => model.TagsString,
+                    new { htmlAttributes = new { @class = "form-control",
+                    required = "required", placeholder = "Description", type = "text",
+                    oninvalid = "setCustomValidity('Ce champ est obligatoire')",
+                    oninput = "setCustomValidity('')" } })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.TypeTitle, "Type du document",
+            new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                <select class="form-control" name="TypeTitle" id="TypeTitle">
+
+                    @foreach (ProjectDocumentTypeCode tc in BTPBCommon.Platform.ProjectDocumentTypeCodes)
+                    {
+                        <option>@tc.Title</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <input type="hidden" name="ProjectId" id="ProjectId" value="@ViewData["ProjectId"]" />
+        <div class="form-group required">
+            <div class="col-lg-10 col-lg-offset-2">
+                <input id="file" class="filename" name="File" value="" type="file" aria-required="true" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

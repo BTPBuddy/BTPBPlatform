@@ -1,0 +1,28 @@
+﻿@using BTPBCommon.Projects;
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+<input type="button" value="Charger des documents" class="btn btn-primary"
+       onclick="@("window.location.href='" + @Url.Action("UploadDocument", "Projects", new { projectId = ViewData["ProjectId"] }) + "'");" />
+<div id="documents_table">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Document</th>
+                <th scope="col">Description</th>
+                <th scope="col">Date de création</th>
+                <th scope="col">Tags</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ProjectDocument p in ViewData["Documents"] as List<ProjectDocument>)
+            {
+                <tr class="table-active">
+                    <td>@p.Title</td>
+                    <td>@p.Description</td>
+                    <td>@p.Created</td>
+                    <td>@string.Join(", ", p.Tags)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
