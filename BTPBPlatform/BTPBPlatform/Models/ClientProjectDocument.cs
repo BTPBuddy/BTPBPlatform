@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace BTPBPlatform.Models
     {
         public string Title { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         public byte[] FileContents { get; set; }
@@ -29,7 +31,7 @@ namespace BTPBPlatform.Models
 
         public string TypeTitle { get; set; }
 
-        private string TypeKey
+        public string TypeKey
         {
             get
             {
@@ -48,50 +50,5 @@ namespace BTPBPlatform.Models
             }
         }
 
-        private void PopulateTags()
-        {
-            if (TagsString.Length > 0)
-            {
-                string[] splits = TagsString.Split(new string[] { ", " }, StringSplitOptions.None);
-                if (splits.Length > 0)
-                {
-                    foreach (string tag in splits)
-                    {
-                        Tags.Add(tag);
-                    }
-                }
-                else
-                {
-                    Tags.Add(TagsString);
-                }
-            }
-        }
-
-        private async Task ReadFileContents()
-        {
-            using (FileStream fs = new FileStream(Path.GetTempFileName(), FileMode.Create))
-            {
-                await File.CopyToAsync(fs);
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    await fs.CopyToAsync(ms);
-                    FileContents = ms.ToArray();
-                }
-            }
-        }
-
-        public async void MakeProjectDocument()
-        {
-            Title = File.FileName;
-
-            PopulateTags();
-            await ReadFileContents();
-
-            ProjectDocument document = new ProjectDocument(ProjectId, Title, TypeKey, Description, Tags);
-            document.Save();
-
-            ProjectDocumentContent content = new ProjectDocumentContent(document.Id, Title, FileContents, ContentTypeId);
-            content.Save();
-        }
     }
 }

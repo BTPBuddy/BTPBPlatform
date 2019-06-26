@@ -4,11 +4,12 @@
 }
 <h1>@ViewData["Title"]</h1>
 <h2>@ViewData["Message"]</h2>
-<input type="button" value="Créer un projet" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("Create", "Projects") + "'");" />
+<a class="btn btn-primary" href="@Url.Action("Create", "Projects")">+ Créer un projet</a>
 <div id="projects_table">
     <table class="table table-hover">
         <thead>
             <tr>
+                <th scope="col"></th>
                 <th scope="col">Projet</th>
                 <th scope="col">Description</th>
                 <th scope="col">Date de création</th>
@@ -19,7 +20,40 @@
         @foreach (Project p in ViewData["Projects"] as List<Project>)
         {
             <tr class="table-active">
-                <td>@Html.ActionLink(@p.Title, "Project", "Projects", new { projectId = p.Id })</td>
+                <td>
+                    <a href="@Url.Action("Project", "Projects", new { projectId = p.Id})">
+                        <i class="fa fa-search"></i>
+                    </a>
+                    <a href="#confirmDelete" data-toggle="modal" data-target="#@p.Id">
+                        <i style="padding-left:10px" class="fa fa-close"></i>
+                    </a>
+                    <div class="modal" id="@p.Id" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Supprimer projet: @p.Title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        Si vous supprimez ce projet, vous perdez tous les documents y associés.
+                                        Est-ce que vous souhaitez continuer ?
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <form asp-action="DeleteProject" asp-controller="Projects">
+                                        <input type="hidden" name="projectId" value="@p.Id" />
+                                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>@p.Title</td>
                 <td>@p.Description</td>
                 <td>@p.Created</td>
                 <td>@p.Documents.Capacity</td>
@@ -29,3 +63,4 @@
         </tbody>
     </table>
 </div>
+
