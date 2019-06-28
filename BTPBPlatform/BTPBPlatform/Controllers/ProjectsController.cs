@@ -77,9 +77,17 @@ namespace BTPBPlatform.Controllers
             ViewData["ProjectId"] = projectId;
             ViewData["Message"] = Convert.ToString(nDocuments) + " " + docs + 
                 " " + association + " avec ce projet";
+            ViewData["Filtered"] = false;
 
 
             return View("Project");
+        }
+
+        [HttpGet]
+        public IActionResult OpenDocument(int documentId)
+        {
+            ProjectDocumentContent content = BTPBCommon.Platform.GetContentForDocumentId(documentId);
+            return File(content.Content, content.ContentType.Key);
         }
 
         [HttpPost]
@@ -130,6 +138,42 @@ namespace BTPBPlatform.Controllers
         }
 
         [HttpPost]
+        public IActionResult FilterDocuments(string searchTags, int projectId)
+        {
+            string[] splits = searchTags.Split(new string[] { ", " }, StringSplitOptions.None);
+
+            Project project = new Project(projectId);
+            List<string> uniqueTags = splits.Select(t => t.ToLower()).ToList();
+            List<ProjectDocument> filteredDocs = new List<ProjectDocument>();
+            
+            foreach (string tagText in uniqueTags)
+            {
+                filteredDocs.AddRange(BTPBCommon.Platform.GetDocumentsFromProjectWithTag(projectId, tagText));
+            }
+
+            string docs = "document";
+            string association = "associé";
+
+            if (filteredDocs.Count != 1)
+            {
+                docs += "s";
+                association += "s";
+            }
+
+            ViewData["Title"] = project.Title;
+            ViewData["Documents"] = filteredDocs;
+            ViewData["ProjectId"] = projectId;
+            ViewData["Message"] = Convert.ToString(filteredDocs.Count) + " " + docs +
+                " " + association + " avec ce projet. Recherche filtré par tags: " 
+                + searchTags;
+
+            ViewData["Filtered"] = true;
+
+
+            return View("Project");
+        }
+
+        [HttpPost]
         public IActionResult Create(ClientProject project)
         {
             if (ModelState.IsValid)
@@ -160,7 +204,9 @@ namespace BTPBPlatform.Controllers
             if (document.TagsString.Length > 0)
             {
                 string[] splits = document.TagsString.Split(new string[] { ", " }, StringSplitOptions.None);
-                foreach (string tag in splits)
+                List<string> uniqueTags = splits.Select(t => t.ToLower()).ToList();
+                uniqueTags = uniqueTags.Distinct().ToList();
+                foreach (string tag in uniqueTags)
                 {
                     document.Tags.Add(tag);
                 }
@@ -180,11 +226,18 @@ namespace BTPBPlatform.Controllers
         protected void MakeProjectDocument(ClientProjectDocument document)
         {
             PopulateTags(document);
-            //ReadFileContents(document);
             document.FileContents = UploadFile(document.File);
             ProjectDocument _document = new ProjectDocument(document.ProjectId, document.Title, document.TypeKey, document.Description, document.Tags);
             _document.Save();
 
+            foreach (string tagText in document.Tags)
+            {
+                Tag tag = new Tag(tagText);
+                tag.Save();
+                ProjectDocumentTag docTag = new ProjectDocumentTag(_document.Id, tag);
+                docTag.Save();
+            }
+            
             ProjectDocumentContentTypeCode _contentType = null;
             try
             {
@@ -202,19 +255,6 @@ namespace BTPBPlatform.Controllers
             }
             ProjectDocumentContent content = new ProjectDocumentContent(_document.Id, document.File.FileName, document.FileContents, _contentType.Id);
             content.Save();
-
-            foreach (string tag in document.Tags)
-            {
-                ProjectDocumentTag oTag = new ProjectDocumentTag(_document.Id, tag);
-                try
-                {
-                    oTag.Save();
-                }
-                catch (BTPBCommon.Exceptions.BTPBException ex)
-                {
-                    throw ex;
-                }
-            }
         }
 
 

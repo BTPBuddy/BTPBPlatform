@@ -2,9 +2,41 @@
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 <input type="button" value="Charger des documents" class="btn btn-primary"
-       onclick="@("window.location.href='" + @Url.Action("UploadDocument", "Projects", 
-                new { projectId = ViewData["ProjectId"] }) + "'");" />
+       onclick="@("window.location.href='" + @Url.Action("UploadDocument", "Projects",
+    new { projectId = ViewData["ProjectId"] }) + "'");" />
+
 <a href="@Url.Action("Index", "Projects")" class="btn btn-primary">Retourner aux projets</a>
+@if ((bool)ViewData["Filtered"])
+{
+    <a href="@Url.Action("Project", "Projects", new { projectId = ViewData["ProjectId"]})" class="btn btn-danger">Enlever le filtre</a>
+}
+<form asp-action="FilterDocuments" asp-controller="Projects"
+      method="post">
+    <div class="col-lg-5 col-lg-offset-6">
+        <div class="form-group">
+            <div class="input-group">
+                @{
+                    List<ProjectDocument> docs = (List<ProjectDocument>)ViewData["Documents"];
+                    int pId = 0;
+                    if (docs.Count > 0)
+                    {
+                        pId = docs.ElementAt(0).Project.Id;
+                    }
+                }
+                <input type="hidden" id="projectId" name="projectId" value="@pId" />
+                <input id="searchTags"
+                       placeholder="Rechercher des tags separés par des virgules..."
+                       class="form-control" name="searchTags"
+                       value="" style="text-align: right" type="text" aria-required="true" required>
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</form>
 <div id="documents_table">
     <table class="table table-hover">
         <thead>
@@ -19,49 +51,50 @@
         <tbody>
             @{ foreach (ProjectDocument p in ViewData["Documents"] as List<ProjectDocument>)
                 {
-                List<ProjectDocumentTag> tags =
-                        BTPBCommon.Platform.ProjectDocumentTags.Where(t => t.ProjectDocumentId == p.Id).ToList();
-                
-            <tr class="table-active">
-                <td>
-                    <a href="#">
-                        <i class="fa fa-search"></i>
-                    </a>
-                    <a href="#confirmDelete" data-toggle="modal" data-target="#@p.Id">
-                        <i style="padding-left:10px" class="fa fa-close"></i>
-                    </a>
-                    <div class="modal" id="@p.Id" tabindex="-1" role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Supprimer document: @p.Title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>
-                                        Est-ce que vous souhaitez vraiment supprimer ce fichier ? 
-                                        Vous pouvez toujours le recharger sur ce projet plus tard.
-                                    </p>
-                                </div>
-                                <div class="modal-footer">
-                                    <form asp-action="DeleteDocument" asp-controller="Projects">
-                                        <input type="hidden" name="documentId" value="@p.Id" />
-                                        <button type="submit" class="btn btn-danger">Supprimer</button>
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
-                                    </form>
+                    List<ProjectDocumentTag> tags =
+                            BTPBCommon.Platform.ProjectDocumentTags.Where(t => t.ProjectDocumentId == p.Id).ToList();
+
+                    <tr class="table-active">
+                        <td>
+                            <a href="@Url.Action("OpenDocument", "Projects", 
+                                    new { documentId = p.Id})">
+                                <i class="fa fa-search"></i>
+                            </a>
+                            <a href="#confirmDelete" data-toggle="modal" data-target="#@p.Id">
+                                <i style="padding-left:10px" class="fa fa-close"></i>
+                            </a>
+                            <div class="modal" id="@p.Id" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Supprimer document: @p.Title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>
+                                                Est-ce que vous souhaitez vraiment supprimer ce fichier ?
+                                                Vous pouvez toujours le recharger sur ce projet plus tard.
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form asp-action="DeleteDocument" asp-controller="Projects">
+                                                <input type="hidden" name="documentId" value="@p.Id" />
+                                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </td>
-                <td>@p.Title</td>
-                <td>@p.Description</td>
-                <td>@p.Created</td>
-                <td>@string.Join(", ", tags.Select(t => t.TagText).ToList())</td>
-            </tr>
-            }}
+                        </td>
+                        <td>@p.Title</td>
+                        <td>@p.Description</td>
+                        <td>@p.Created</td>
+                        <td>@string.Join(", ", tags.Select(t => t.Tag.TagText).ToList())</td>
+                    </tr>
+                }}
         </tbody>
     </table>
 </div>
