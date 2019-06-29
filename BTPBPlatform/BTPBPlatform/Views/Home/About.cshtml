@@ -1,57 +1,413 @@
 ﻿<h2>@ViewData["Message"]</h2>
 <h3>L'equipe</h3>
-<ul class="nav nav-tabs">
-    <li class="active"><a href="#david" data-toggle="tab" aria-expanded="true">David O'Neill</a></li>
-    <li class=""><a href="#ertan" data-toggle="tab" aria-expanded="false">Ertan Ozaydin</a></li>
-    <li class=""><a href="#mickael" data-toggle="tab" aria-expanded="false">Mickael Privat</a></li>
-    <li class=""><a href="#morgane" data-toggle="tab" aria-expanded="false">Morgane Le-Fur</a></li>
-    <li class=""><a href="#raphael" data-toggle="tab" aria-expanded="false">Raphaël de Dumast</a></li>
-</ul>
-<div id="teamtab" class="tab-content">
-    <div class="tab-pane fade active in" id="david">
-        <p class="userbio">
-            David O'Neill est un physicien/développeur de logiciels devenu datascientist.<br /><br />
-            Actuellement étudiant en datascience à HETIC, il
-            cherche de nouvelles opportunités pour appliquer ses compétences en
-            développement logiciel et en mathématiques afin de résoudre des problèmes urgents
-            en développant des applications robustes.<br /><br />
-            David est le principal développeur backend et a mis en place les fonctionnalités de la plateforme.
-        </p>
-    </div>
-    <div class="tab-pane fade" id="ertan">
-        <p class="userbio">
-            Ertan Ozaydin est actuellement étudiant en Marketing Digitale à HETIC, orienté dans l’UX Design
-            suite au divers expériences pendant sa vie étudiantes. 
-            <br /><br />Ayant 3 ans d'experience de web-dev, 
-            il est le principal développeur frontend et responsable de la conception UX dans la plateforme.
-        </p>
-    </div>
-    <div class="tab-pane fade" id="mickael">
-        <p class="userbio">
-            Mickael Privat est actuellement étudiant en Marketing Digitale UX à HETIC, specialisé en CRM.
-            Il possède un bagage segmenté en deux parties : Marking et UX.
-            <br /><br />
-            Mickael a des compétences en Salesforce, Pardot, Marketo, et d'autres outils variés de marketing automation.
-            Différentes fonctionnalités seront utilisées au sein de BTPBuddy tel qu’une intégration CRM,
-            la gestion d’email marketing, de lead management, lead nurturing, de social media marketing et ROI reporting.
-        </p>
-    </div>
-    <div class="tab-pane fade" id="morgane">
-        <p class="userbio">
-            Morgane Le Fur est étudiante en 5 ème année de Marketing UX à HETIC, 
-            spécialisé en Marketing et Qualité client. <br/><br/>
-            Appétence pour la création de projet adcenter dans une optique durable, 
-            ses compétences transversales sont mises en exerce dans la veille de marché, 
-            l’innovation et la stratégie.
-        </p>
-    </div>
-    <div class="tab-pane fade" id="raphael">
-        <p class="userbio">
-            Actuellement étudiant en Marketing Digital à HETIC, Raphaël rejoint la formation après un 
-            Master 1 de Droit des Affaires. Sa passion pour l’entrepreunariat et 
-            le digital l’a poussé à se reconvertir suite à ses études de droit.
-            <br /><br />
-            Il est spécialisé en acquisition payante.
-        </p>
+<style>
+    .rounded-circle {
+        border-radius: 50% !important;
+    }
+
+    .img-center {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .shadow {
+        box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07) !important;
+    }
+
+    .shadow-lg--hover:hover {
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
+    }
+
+    .d-block {
+        display: block !important;
+    }
+
+    .mb-1 {
+        margin-bottom: .25rem !important;
+    }
+
+    .text-muted {
+        color: #8898aa !important;
+    }
+
+    .px-4 {
+        padding-right: 1.5rem !important;
+    }
+
+    .pt-4 {
+        padding-top: 1.5rem !important;
+    }
+
+    .mt-3 {
+        margin-top: 1rem !important;
+    }
+
+    .mb-5 {
+        margin-bottom: 3rem !important;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-lg-6 mb-5 mb-lg-0">
+            <div class="px-4">
+                <img src="~/images/raphael.png" data-toggle="modal" data-target="#raphael_modal" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 200px;">
+                <div class="pt-4 text-center">
+                    <h5 class="title">
+                        <span class="d-block mb-1">Raphaël De Dumast</span>
+                        <small class="h6 text-muted">CEO</small>
+                    </h5>
+                    <div class="mt-3">
+                        <a href="https://www.linkedin.com/in/rdedumast/" class="btn btn-info btn-icon-only rounded-circle">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6 mb-5 mb-lg-0">
+            <div class="px-4">
+                <img src="~/images/david.png" 
+                     data-toggle="modal" data-target="#david_modal" 
+                     class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 200px;">
+                <div class="pt-4 text-center">
+                    <h5 class="title">
+                        <span class="d-block mb-1">David O'Neill</span>
+                        <small class="h6 text-muted">CTO</small>
+                    </h5>
+                    <div class="mt-3">
+                        <a href="https://www.linkedin.com/in/doneill612" class="btn btn-primary btn-icon-only rounded-circle">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/doneill612" class="btn btn-primary btn-icon-only rounded-circle">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6 mb-5 mb-lg-0">
+            <div class="px-4">
+                <img src="~/images/ertan.png" data-toggle="modal" data-target="#ertan_modal" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 200px;">
+                <div class="pt-4 text-center">
+                    <h5 class="title">
+                        <span class="d-block mb-1">Ertan Ozaydin</span>
+                        <small class="h6 text-muted">Product Owner / Designer</small>
+                    </h5>
+                    <div class="mt-3">
+                        <a href="https://www.linkedin.com/in/ertan-ozaydin/" class="btn btn-warning btn-icon-only rounded-circle">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/Ertoun" class="btn btn-warning btn-icon-only rounded-circle">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6 mb-5 mb-lg-0">
+            <div class="px-4">
+                <img src="~/images/morgane.png" data-toggle="modal" data-target="#morgane_modal" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 200px;">
+                <div class="pt-4 text-center">
+                    <h5 class="title">
+                        <span class="d-block mb-1">Morgane Le Fur </span>
+                        <small class="h6 text-muted">Product Manager / Support client</small>
+                    </h5>
+                    <div class="mt-3">
+                        <a href="https://www.linkedin.com/in/morgane-le-fur-29b61a146" class="btn btn-success btn-icon-only rounded-circle">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div><div class="col-md-6 col-lg-12 mb-5 mb-lg-0">
+            <div class="px-4">
+                <img src="~/images/mickael.png" data-toggle="modal" data-target="#mickael_modal" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 200px;">
+                <div class="pt-4 text-center">
+                    <h5 class="title">
+                        <span class="d-block mb-1">Mickael Privat</span>
+                        <small class="h6 text-muted">Acquisition Manager</small>
+                    </h5>
+                    <div class="mt-3">
+                        <a href="https://www.linkedin.com/in/mickaelprivat/" class="btn btn-warning btn-icon-only rounded-circle">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<div class="modal" id="david_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <img src="~/images/david.png" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 200px;">
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    David est un physicien/développeur de logiciels devenu Data Scientist.<br /><br />
+
+                    Il cherche des nouvelles opportunités pour appliquer
+                    ses compétences en développement logiciel et mathématiques
+                    afin de résoudre des problèmes urgents en développant des a
+                    pplications robustes.<br /><br />
+
+                    David est le principal développeur de BTPBuddy.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="david_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <img src="~/images/david.png" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 200px;">
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    David est un physicien/développeur de logiciels devenu Data Scientist.<br /><br />
+
+                    Il cherche des nouvelles opportunités pour appliquer
+                    ses compétences en développement logiciel et mathématiques
+                    afin de résoudre des problèmes urgents en développant des a
+                    pplications robustes.<br /><br />
+
+                    David est le principal développeur de BTPBuddy.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="david_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <img src="~/images/david.png" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 200px;">
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    David est un physicien/développeur de logiciels devenu Data Scientist.<br /><br />
+
+                    Il cherche des nouvelles opportunités pour appliquer
+                    ses compétences en développement logiciel et mathématiques
+                    afin de résoudre des problèmes urgents en développant des a
+                    pplications robustes.<br /><br />
+
+                    David est le principal développeur de BTPBuddy.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="david_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <img src="~/images/david.png" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 200px;">
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    David est un physicien/développeur de logiciels devenu Data Scientist.<br /><br />
+
+                    Il cherche des nouvelles opportunités pour appliquer
+                    ses compétences en développement logiciel et mathématiques
+                    afin de résoudre des problèmes urgents en développant des a
+                    pplications robustes.<br /><br />
+
+                    David est le principal développeur de BTPBuddy.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="raphael_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <img src="~/images/raphael.png" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 200px;">
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Actuellement étudiant en Marketing Digital à HETIC, 
+                    Raphaël rejoint la formation après un Master 1 de Droit 
+                    des Affaires. Sa passion pour l’entrepreunariat et le digital 
+                    l’a poussé à se reconvertir suite à ses études de droit.
+                    <br/><br/>
+                    Il est spécialisé en acquisition payante.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="david_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <img src="~/images/david.png" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 200px;">
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    David est un physicien/développeur de logiciels devenu Data Scientist.<br /><br />
+
+                    Il cherche des nouvelles opportunités pour appliquer
+                    ses compétences en développement logiciel et mathématiques
+                    afin de résoudre des problèmes urgents en développant des a
+                    pplications robustes.<br /><br />
+
+                    David est le principal développeur de BTPBuddy.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="ertan_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <img src="~/images/ertan.png" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 200px;">
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Ertan Ozaydin est actuellement étudiant en Marketing 
+                    Digitale à HETIC, orienté dans l’UX Design suite au 
+                    divers expériences pendant sa vie étudiantes.
+                    <br/><br />
+                    Ayant 3 ans d'experience de web-dev, 
+                    il est responsable de la conception UX dans la plateforme.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="morgane_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <img src="~/images/morgane.png" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 200px;">
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Morgane Le Fur est étudiante en 5 ème année de Marketing 
+                    UX à HETIC, spécialisé en Marketing et Qualité client.
+                    <br/><br />
+                    Appétence pour la création de projet adcenter dans 
+                    une optique durable, ses compétences transversales sont 
+                    mises en exerce dans la veille de marché, l’innovation et 
+                    la stratégie.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="mickael_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <img src="~/images/mickael.png" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 200px;">
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Mickael Privat est actuellement étudiant en Marketing Digitale 
+                    UX à HETIC, specialisé en CRM. Il possède un bagage segmenté 
+                    en deux parties : Marking et UX.<br/><br />
+
+                    Mickael a des compétences en Salesforce, Pardot, 
+                    Marketo, et d'autres outils variés de marketing automation. 
+                    Différentes fonctionnalités seront utilisées au sein de 
+                    BTPBuddy tel qu’une intégration CRM, la gestion d’email 
+                    marketing, de lead management, lead nurturing, de social 
+                    media marketing et ROI reporting.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
